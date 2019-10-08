@@ -3,11 +3,11 @@ defmodule HitoAPI_Elixir.Directory.Person do
   import Ecto.Changeset
 
   schema "persons" do
-    field :cep, :string
-    field :cpf, :string
-    field :email, :string
-    field :nome, :string
-    field :numero, :integer
+    field :cep, :string, null: false
+    field :cpf, :string, null: false
+    field :email, :string, null: false
+    field :nome, :string, null: false
+    field :numero, :integer, null: false
 
     timestamps()
   end
