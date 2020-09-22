@@ -33,7 +33,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
     test "lists all persons", %{conn: conn} do
       conn =
         get(conn, "/api/persons")
-        |> doc
+        |> doc(operation_id: "index_user")
       assert conn.status == 200
     end
   end
@@ -41,7 +41,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
   describe "create person" do
     test "renders person when data is valid", %{conn: conn} do
       conn = post(conn, Routes.person_path(conn, :create), person: @create_attrs)
-      |> doc
+      |> doc(operation_id: "create_user")
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.person_path(conn, :show, id))
@@ -58,7 +58,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.person_path(conn, :create), person: @invalid_attrs)
-      |> doc
+      |> doc(operation_id: "create_invalid_user")
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -68,7 +68,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "renders person when data is valid", %{conn: conn, person: %Person{id: id} = person} do
       conn = put(conn, Routes.person_path(conn, :update, person), person: @update_attrs)
-      |> doc
+      |> doc(operation_id: "update_user")
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.person_path(conn, :show, id))
@@ -85,7 +85,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, person: person} do
       conn = put(conn, Routes.person_path(conn, :update, person), person: @invalid_attrs)
-      |> doc
+      |> doc(operation_id: "update_invalid_user")
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -95,7 +95,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "deletes chosen person", %{conn: conn, person: person} do
       conn = delete(conn, Routes.person_path(conn, :delete, person))
-      |> doc
+      |> doc(operation_id: "delete_user")
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->

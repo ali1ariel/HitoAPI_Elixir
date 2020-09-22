@@ -7,6 +7,19 @@
 # General application configuration
 use Mix.Config
 
+
+config :hitoAPI_Elixir, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: HitoAPI_ElixirWeb.Router,     # phoenix routes will be converted to swagger paths
+      endpoint: HitoAPI_ElixirWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
+    ]
+  }
+
+config :phoenix_swagger, json_library: Jason
+
+
+
 config :hitoAPI_Elixir,
   ecto_repos: [HitoAPI_Elixir.Repo]
 

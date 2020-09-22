@@ -12,4 +12,13 @@ defmodule HitoAPI_ElixirWeb.Router do
     options "/persons/:id", PersonController, :options
     options "/persons", PersonController, :options
   end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "1.0",
+        title: "HitoAPI Elixir"
+      }
+    }
+  end
 end
