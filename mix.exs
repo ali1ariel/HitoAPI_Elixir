@@ -41,7 +41,9 @@ defmodule HitoAPI_Elixir.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:cors_plug, "~> 1.5"}
+      {:cors_plug, "~> 1.5"},
+      {:bureaucrat, "~> 0.2.7"},
+      {:poison, "~> 3.1"}
     ]
   end
 

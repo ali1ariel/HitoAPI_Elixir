@@ -31,14 +31,17 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
   describe "index" do
     test "lists all persons", %{conn: conn} do
-      conn = get(conn, Routes.person_path(conn, :index))
-      assert json_response(conn, 200)["data"] == []
+      conn =
+        get(conn, "/api/persons")
+        |> doc
+      assert conn.status == 200
     end
   end
 
   describe "create person" do
     test "renders person when data is valid", %{conn: conn} do
       conn = post(conn, Routes.person_path(conn, :create), person: @create_attrs)
+      |> doc
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.person_path(conn, :show, id))
@@ -55,6 +58,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.person_path(conn, :create), person: @invalid_attrs)
+      |> doc
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -64,6 +68,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "renders person when data is valid", %{conn: conn, person: %Person{id: id} = person} do
       conn = put(conn, Routes.person_path(conn, :update, person), person: @update_attrs)
+      |> doc
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.person_path(conn, :show, id))
@@ -80,6 +85,7 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, person: person} do
       conn = put(conn, Routes.person_path(conn, :update, person), person: @invalid_attrs)
+      |> doc
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -89,10 +95,12 @@ defmodule HitoAPI_ElixirWeb.PersonControllerTest do
 
     test "deletes chosen person", %{conn: conn, person: person} do
       conn = delete(conn, Routes.person_path(conn, :delete, person))
+      |> doc
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
         get(conn, Routes.person_path(conn, :show, person))
+        |> doc
       end
     end
   end

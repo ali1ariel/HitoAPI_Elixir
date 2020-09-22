@@ -17,6 +17,9 @@ defmodule HitoAPI_ElixirWeb.ConnCase do
 
   using do
     quote do
+
+      import Bureaucrat.Helpers
+
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias HitoAPI_ElixirWeb.Router.Helpers, as: Routes
