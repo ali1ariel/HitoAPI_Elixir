@@ -15,10 +15,12 @@ defmodule HitoAPI_ElixirWeb.Router do
 
   def swagger_info do
     %{
+      basePath: "/api",
       info: %{
         version: "1.0",
         title: "HitoAPI Elixir"
-      }
+      },
+      tags: [%{name: "Persons", description: "Operations about Users"}]
     }
   end
 end

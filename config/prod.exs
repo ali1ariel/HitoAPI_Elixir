@@ -10,6 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :hitoAPI_Elixir, HitoAPI_ElixirWeb.Endpoint,
+  load_from_system_env: true, # Expects url host and port to be configured in Endpoint.init callback
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 

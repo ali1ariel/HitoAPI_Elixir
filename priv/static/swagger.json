@@ -1,10 +1,66 @@
 {
-  "definitions": {},
+  "basePath": "/api",
+  "definitions": {
+    "Person": {
+      "description": "A Person of the application",
+      "example": {
+        "cep": "83065030",
+        "cpf": "04325416874",
+        "id": 123,
+        "name": "Joe",
+        "numero": "120"
+      },
+      "properties": {
+        "cep": {
+          "description": "User address cep",
+          "type": "string"
+        },
+        "cpf": {
+          "description": "User document number",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier",
+          "type": "integer"
+        },
+        "nome": {
+          "description": "Users name",
+          "type": "string"
+        },
+        "numero": {
+          "description": "User address number",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "numero",
+        "cep",
+        "cpf",
+        "nome"
+      ],
+      "title": "Person",
+      "type": "object"
+    },
+    "Persons": {
+      "description": "A collection of Persons",
+      "items": {
+        "$ref": "#/definitions/Person"
+      },
+      "title": "Persons",
+      "type": "array"
+    }
+  },
   "host": "localhost:4000",
   "info": {
     "title": "HitoAPI Elixir",
     "version": "1.0"
   },
   "paths": {},
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Operations about Users",
+      "name": "Persons"
+    }
+  ]
 }
